@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h> 
+void baseball(void);
+int main()
+{
+ long start_time, end_time, elasped_time;
+ int minute, second;
+ start_time = time(NULL);
+ 
+ baseball();
+ end_time = time(NULL);
+ elasped_time = end_time - start_time;
+ minute = elasped_time / 60;
+ second = elasped_time % 60;
+ printf("소요된 시간 : %d분 %d초\n", minute, second);
+ 
+ return 0;
+}
+void baseball(void)   {
+ int computer[4]={0}, man[4];
+ int i,j, temp=1;
+ int strike, ball, trial=0;
+ srand(time(NULL));
+ 
+ while(computer[0]==computer[1]||computer[0]==computer[2]||
+       computer[0]==computer[3]||computer[1]==computer[2]||
+       computer[1]==computer[3]||computer[2]==computer[3]){
+        
+        for(i=0; i<4; i++)
+            computer[i]=(rand()%10);
+    }
+ while(temp){
+  strike=ball=0;
+  trial=trial+1;
+  
+  printf("숫자 4개를 입력하세요 : ");
+  scanf("%d%d%d%d", &man[0], &man[1], &man[3], &man[3]);
+  for(i=0; i<4; i++)
+      if(computer[i]==man[i])
+       strike=strike+1;
+  for(i=0; i<4; i++){
+   for(j=0; j<4; j++){
+    if(computer[i]==man[j])
+        ball=ball+1;
+   }
+  }      
+ ball=ball-strike;
+ printf("strike = %d, ball = %d, trial = %d\n",
+                strike, ball, trial);
+       if(strike==4) temp=0;
+ }
+} 
